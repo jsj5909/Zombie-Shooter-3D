@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         _direction.y -= _gravity * Time.deltaTime;
 
         //this changes from local to world
-        _direction = transform.TransformDirection(_direction);
+       _direction = transform.TransformDirection(_direction);
 
         _controller.Move(_direction * _speed * Time.deltaTime);
        
@@ -97,7 +97,8 @@ public class Player : MonoBehaviour
 
         //look up and down
         Vector3 currentCameraRotation = _mainCamera.gameObject.transform.localEulerAngles;
-        currentCameraRotation.x -= mouseY;
+        currentCameraRotation.x -= mouseY * _cameraSensitivity ;
+        currentCameraRotation.x = Mathf.Clamp(currentCameraRotation.x, 0, 26);
         _mainCamera.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCameraRotation.x, Vector3.right);
 
     }
