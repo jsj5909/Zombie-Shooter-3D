@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+
+    [SerializeField]
+    private GameObject _bloodSplatter; 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +33,7 @@ public class Shoot : MonoBehaviour
             Ray rayOrigin = Camera.main.ViewportPointToRay(center);
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(rayOrigin, out hitInfo))
+            if (Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity,1<<0))
             {
                 Debug.Log("Hit: " + hitInfo.collider.name);
 
@@ -37,7 +41,14 @@ public class Shoot : MonoBehaviour
 
                 if(health != null)
                 {
+                   
+
+                    GameObject blood = Instantiate(_bloodSplatter, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+
+                    Destroy(blood, 0.75f);
+
                     health.Damage(50);
+
                 }
 
             }

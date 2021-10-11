@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
-  _jumpHeight: 2
-  _gravity: 20
+  _jumpHeight: 10
+  _gravity: 50
   _cameraSensitivity: 1
 --- !u!114 &436852264
 MonoBehaviour:

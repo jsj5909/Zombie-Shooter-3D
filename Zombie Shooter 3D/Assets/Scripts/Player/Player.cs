@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     private Camera _mainCamera;
 
+    private float _yVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,31 +55,37 @@ public class Player : MonoBehaviour
 
     void CalculateMovement()
     {
+          
+        float horizontal = Input.GetAxis("Horizontal");
+
+        float vertical = Input.GetAxis("Vertical");
+
+        _direction = new Vector3(horizontal, 0, vertical);
+
+        Vector3 velocity = _direction * _speed;
+
+        velocity = transform.TransformDirection(velocity);
+
         if (_controller.isGrounded)
         {
-
-            float horizontal = Input.GetAxis("Horizontal");
-
-            float vertical = Input.GetAxis("Vertical");
-
-            _direction = new Vector3(horizontal, 0, vertical);
-
-
-
-            if (Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                _direction.y = _jumpHeight;
+               _yVelocity = _jumpHeight;
             }
-
-
         }
-        _direction.y -= _gravity * Time.deltaTime;
+        else
+        {
+            _yVelocity -= _gravity * Time.deltaTime;
+        }
 
-        //this changes from local to world
-       _direction = transform.TransformDirection(_direction);
+        velocity.y = _yVelocity;
 
-        _controller.Move(_direction * _speed * Time.deltaTime);
        
+
+        _controller.Move(velocity * Time.deltaTime);
+
+      
+
     }
 
     void CameraRotation()

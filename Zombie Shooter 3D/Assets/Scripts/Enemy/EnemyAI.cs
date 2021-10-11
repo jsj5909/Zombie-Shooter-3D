@@ -71,6 +71,17 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public void StartAttack()
+    {
+        _currentState = EnemyState.ATTACK;
+    }
+
+    public void StopAttack()
+    {
+        _currentState = EnemyState.CHASE;
+    }
+
+
     void CalculateMovement()
     {
         //check if grounded
@@ -102,21 +113,6 @@ public class EnemyAI : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-           _currentState = EnemyState.ATTACK;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            _currentState = EnemyState.CHASE;
-        }
-    }
 
    
   
