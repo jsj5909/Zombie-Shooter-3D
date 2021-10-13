@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     private float _yVelocity;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,7 +108,7 @@ public class Player : MonoBehaviour
         //look up and down
         Vector3 currentCameraRotation = _mainCamera.gameObject.transform.localEulerAngles;
         currentCameraRotation.x -= mouseY * _cameraSensitivity ;
-        currentCameraRotation.x = Mathf.Clamp(currentCameraRotation.x, 0, 26);
+        currentCameraRotation.x = Mathf.Clamp(currentCameraRotation.x, 0,58);
         _mainCamera.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCameraRotation.x, Vector3.right);
 
     }
